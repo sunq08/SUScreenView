@@ -30,6 +30,17 @@
 
 - (void)initBase{
     self.tintColor =[UIColor clearColor];
+    
+    UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 44)];
+    toolbar.tintColor = [UIColor blueColor];
+    UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
+    UIBarButtonItem *bar = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(textFieldDone)];
+    toolbar.items = @[space, bar];
+    self.inputAccessoryView = toolbar;
+}
+
+- (void)textFieldDone{
+    [self resignFirstResponder];
 }
 
 - (void)drawRect:(CGRect)rect {

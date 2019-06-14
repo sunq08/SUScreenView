@@ -10,13 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 typedef enum SUScreenOptionCellStyle {
-    SUScreenCellStyleInput  = 0,        //无录制任务
-    SUScreenCellStyleSelect = 1,     //录制中
-    SUScreenCellStyleRadio  = 2    //录制取消中
+    SUScreenCellStyleInput      = 0,        //输入框
+    SUScreenCellStyleSelect     = 1,        //select
+    SUScreenCellStyleRadio      = 2,        //单选确认
+    SUScreenCellStyleDatePicker = 3,        //选择时间
+    SUScreenCellStyleCardPicker = 4,        //卡片视图选择
+    SUScreenCellStyleOther      = 99,       //其他，自定义布局
 }SUScreenOptionCellStyle;
 
 @interface SUScreenOptionCell : UIView
-/** type:1,输入框。2，选择框。3，单选*/
 /** identifier:当前cell的标识，用于获取data时的key，同一个筛选框中的identifier需要唯一*/
 - (id)initWithFrame:(CGRect)frame style:(SUScreenOptionCellStyle)style identifier:(NSString *)identifier;
 /** 标题*/

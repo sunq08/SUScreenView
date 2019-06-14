@@ -39,7 +39,7 @@
     BOOL resign = [super resignFirstResponder];
     
     NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [format setDateFormat:@"yyyy.MM.dd HH:mm:ss"];
     self.text = [format stringFromDate:datePicker.date];
     
     return resign;

@@ -34,15 +34,17 @@
 - (void)initUI{
     self.titleLab.frame             = CGRectMake(15, 15, SUScreenWidth - 30, 21);
     [self addSubview:self.titleLab];
-    if(self.style == 1) {//输入框
+    if(self.style == SUScreenCellStyleInput) {//输入框
         self.mainTF.frame           = CGRectMake(15, 44, SUScreenWidth - 30, 30);
         [self addSubview:self.mainTF];
-    } else if (self.style == 2) {//选择框
+    } else if (self.style == SUScreenCellStyleSelect) {//选择框
         self.mainPicker.frame       = CGRectMake(15, 44, SUScreenWidth - 30, 30);
         [self addSubview:self.mainPicker];
-    } else if (self.style == 3) {//单选
+    } else if (self.style == SUScreenCellStyleRadio) {//单选
         self.mainRadio.frame        = CGRectMake(15, 44, SUScreenWidth - 30, 30);
         [self addSubview:self.mainRadio];
+    } else {
+        NSLog(@"错误的cell类型");
     }
 }
 
@@ -64,7 +66,7 @@
         _mainTF.backgroundColor     = [UIColor whiteColor];
         _mainTF.leftView            = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
         _mainTF.leftViewMode        = UITextFieldViewModeAlways;
-        [_mainTF layoutRadius:2];
+        [SUHelper layoutViewRadioWith:_mainTF radio:2];
     }
     return _mainTF;
 }
@@ -77,7 +79,7 @@
         _mainPicker.backgroundColor     = [UIColor whiteColor];
         _mainPicker.leftView            = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
         _mainPicker.leftViewMode        = UITextFieldViewModeAlways;
-        [_mainPicker layoutRadius:2];
+        [SUHelper layoutViewRadioWith:_mainPicker radio:2];
     }
     return _mainPicker;
 }
@@ -87,8 +89,8 @@
         _mainRadio = [UIButton buttonWithType:UIButtonTypeCustom];
         [_mainRadio setTitle:@"是" forState:UIControlStateNormal];
         [_mainRadio.titleLabel setFont:[UIFont systemFontOfSize:14]];
-        [_mainRadio setBackgroundColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        [_mainRadio setBackgroundColor:SURGBA(206, 238, 248, 1) forState:UIControlStateSelected];
+        [_mainRadio setBackgroundImage:[SUHelper imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [_mainRadio setBackgroundImage:[SUHelper imageWithColor:resetBgColor] forState:UIControlStateSelected];
         [_mainRadio setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [_mainRadio setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [_mainRadio addTarget:self action:@selector(radioClick:) forControlEvents:UIControlEventTouchUpInside];

@@ -30,17 +30,22 @@
 }
 
 - (NSInteger)ghScreenViewOptionNumber{
-    return 2;
+    return 3;
 }
 
 - (SUScreenOptionCell *)ghScreenViewCellForIndex:(NSInteger)index{
     if(index == 0){
-        SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:1 identifier:@"sendUser"];
+        SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleInput identifier:@"sendUser"];
         cell.title = @"发送人";
         return cell;
+    } else if(index == 1){
+        SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleSelect identifier:@"type"];
+        cell.pickerData = @{@"1":@"质量考查",@"2":@"6S",@"3":@"CSR",@"4":@"交流回访",@"5":@"仓库评审",@"6":@"其他考查"};
+        cell.title = @"考查类型";
+        return cell;
     } else {
-        SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:1 identifier:@"title"];
-        cell.title = @"标题";
+        SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleRadio identifier:@"title"];
+        cell.title = @"我发起的";
         return cell;
     }
 }

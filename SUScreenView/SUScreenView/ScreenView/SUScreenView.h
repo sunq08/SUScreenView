@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "SUScreenOptionCell.h"
-#import "SUScreenConfig.h"
+
 NS_ASSUME_NONNULL_BEGIN
 
 /** 数据源*/
