@@ -8,7 +8,7 @@
 
 #import "SUScreenConfig.h"
 
-@implementation SUHelper
+@implementation SUScreenHelper
 + (void)layoutViewRadioWith:(UIView *)view radio:(int)radio{
     [view.layer setCornerRadius:radio];
     [view.layer setMasksToBounds:YES];

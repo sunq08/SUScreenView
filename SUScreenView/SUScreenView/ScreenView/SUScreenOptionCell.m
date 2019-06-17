@@ -10,7 +10,7 @@
 
 #import "SUScreenConfig.h"
 @interface SUScreenOptionCell()
-@property (nonatomic ,assign) SUScreenOptionCellStyle style;//1,输入框。2，选择框
+
 @property (nonatomic ,  copy) NSString              *identifier;//identifier
 @property (nonatomic ,strong) UILabel               *titleLab;//title
 @property (nonatomic ,strong) UITextField           *mainTF;//tf
@@ -39,6 +39,8 @@
         [self addSubview:self.mainPicker];
     } else if (self.style == SUScreenCellStyleRadio) {//单选
         [self addSubview:self.mainRadio];
+    } else if (self.style == SUScreenCellStyleOther) {//自定义类型
+        
     } else {
         NSLog(@"错误的cell类型");
     }
@@ -48,6 +50,7 @@
     [super layoutSubviews];
     
     float width = self.frame.size.width;
+    float height = self.frame.size.height;
     self.titleLab.frame             = CGRectMake(15, 15, width - 30, 21);
     if(self.style == SUScreenCellStyleInput) {//输入框
         self.mainTF.frame           = CGRectMake(15, 44, width - 30, 30);
@@ -55,6 +58,8 @@
         self.mainPicker.frame       = CGRectMake(15, 44, width - 30, 30);
     } else if (self.style == SUScreenCellStyleRadio) {//单选
         self.mainRadio.frame        = CGRectMake(15, 44, width - 30, 30);
+    } else if (self.style == SUScreenCellStyleOther) {//自定义布局
+        self.customView.frame       = CGRectMake(15, 44, width - 30, height-44-6);
     } else {
         NSLog(@"错误的cell类型");
     }
@@ -78,7 +83,7 @@
         _mainTF.backgroundColor     = [UIColor whiteColor];
         _mainTF.leftView            = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
         _mainTF.leftViewMode        = UITextFieldViewModeAlways;
-        [SUHelper layoutViewRadioWith:_mainTF radio:2];
+        [SUScreenHelper layoutViewRadioWith:_mainTF radio:2];
     }
     return _mainTF;
 }
@@ -91,7 +96,7 @@
         _mainPicker.backgroundColor     = [UIColor whiteColor];
         _mainPicker.leftView            = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
         _mainPicker.leftViewMode        = UITextFieldViewModeAlways;
-        [SUHelper layoutViewRadioWith:_mainPicker radio:2];
+        [SUScreenHelper layoutViewRadioWith:_mainPicker radio:2];
     }
     return _mainPicker;
 }
@@ -101,8 +106,8 @@
         _mainRadio = [UIButton buttonWithType:UIButtonTypeCustom];
         [_mainRadio setTitle:@"是" forState:UIControlStateNormal];
         [_mainRadio.titleLabel setFont:[UIFont systemFontOfSize:14]];
-        [_mainRadio setBackgroundImage:[SUHelper imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
-        [_mainRadio setBackgroundImage:[SUHelper imageWithColor:resetBgColor] forState:UIControlStateSelected];
+        [_mainRadio setBackgroundImage:[SUScreenHelper imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
+        [_mainRadio setBackgroundImage:[SUScreenHelper imageWithColor:resetBgColor] forState:UIControlStateSelected];
         [_mainRadio setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [_mainRadio setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [_mainRadio addTarget:self action:@selector(radioClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -124,6 +129,12 @@
 }
 
 #pragma mark - supper set
+- (void)setCustomView:(UIView *)customView{
+    _customView = customView;
+    
+    [self addSubview:customView];
+}
+
 - (void)setTitle:(NSString *)title{
     _title = title;
     

@@ -37,27 +37,48 @@
     return _screenViewSide;
 }
 
-- (NSInteger)ghScreenViewOptionNumber{
-    return 3;
+- (NSInteger)suScreenViewOptionNumber{
+    return 4;
 }
 
-- (SUScreenOptionCell *)ghScreenViewCellForIndex:(NSInteger)index{
+- (SUScreenOptionCell *)suScreenViewCellForIndex:(NSInteger)index{
     if(index == 0){
         SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleInput identifier:@"sendUser"];
         cell.title = @"发送人";
         return cell;
     } else if(index == 1){
         SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleSelect identifier:@"type"];
-        cell.pickerData = @{@"1":@"质量考查",@"2":@"6S",@"3":@"CSR",@"4":@"交流回访",@"5":@"仓库评审",@"6":@"其他考查"};
-        cell.title = @"考查类型";
+        cell.pickerData = @{@"1":@"全部",@"2":@"已读",@"3":@"未读"};
+        cell.title = @"消息状态";
         return cell;
-    } else {
+    }  else if(index == 2){
+        SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleOther identifier:@"type"];
+        cell.title = @"自定义布局";
+        return cell;
+    }else {
         SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleRadio identifier:@"title"];
         cell.title = @"我发起的";
         return cell;
     }
 }
-- (void)ghScreenViewSearchEvent:(NSDictionary *)dict{
+
+- (CGFloat)suScreenViewCellHeightForIndex:(NSInteger)index{
+    if(index == 2){
+        return 100;
+    }
+    return 80;
+}
+
+- (UIView *)suCustomViewForCellIndex:(NSInteger)index{
+    if(index == 2){
+        UIView *view = [[UIView alloc]init];
+        view.backgroundColor = [UIColor yellowColor];
+        return view;
+    }
+    return nil;
+}
+
+- (void)suScreenViewSearchEvent:(NSDictionary *)dict{
     NSLog(@"%@",dict);
 }
 

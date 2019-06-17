@@ -19,22 +19,27 @@ typedef enum SUScreenViewStyle {
 @protocol SUScreenViewDelegate <NSObject>
 @required
 /** 共有几个选项*/
-- (NSInteger)ghScreenViewOptionNumber;
+- (NSInteger)suScreenViewOptionNumber;
 /** 设置单个选项的类型，标题等信息*/
-- (SUScreenOptionCell *)ghScreenViewCellForIndex:(NSInteger)index;
+- (SUScreenOptionCell *)suScreenViewCellForIndex:(NSInteger)index;
 /** 点击重置、确定调用的方法，将数据带出*/
-- (void)ghScreenViewSearchEvent:(NSDictionary *)dict;
+- (void)suScreenViewSearchEvent:(NSDictionary *)dict;
+@optional
+/** 设置单个选项的高度，主要是针对非标准cell的高度适配*/
+- (CGFloat)suScreenViewCellHeightForIndex:(NSInteger)index;
+/** 自定义视图的cell设置内容*/
+- (UIView *)suCustomViewForCellIndex:(NSInteger)index;
 @end
 
 @interface SUScreenView : UIView
 
 - (id)initWithFrame:(CGRect)frame style:(SUScreenViewStyle)style;
+/** 代理*/
+@property (nonatomic, assign) id<SUScreenViewDelegate> delegate;
 /** 弹窗打开*/
 - (void)show;
 /** 初始化，设置完数据源后调用*/
 - (void)reloadData;
-/** 代理*/
-@property (nonatomic, assign) id<SUScreenViewDelegate> delegate;
 @end
 
 NS_ASSUME_NONNULL_END

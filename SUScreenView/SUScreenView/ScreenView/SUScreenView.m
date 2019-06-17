@@ -18,6 +18,8 @@
 @property (nonatomic, strong) UIButton      *resetBtn;      //重置按钮
 @property (nonatomic, strong) UIButton      *sureBtn;       //确定按钮
 @property (nonatomic, strong) NSMutableArray *cells;        //内容list
+
+@property (nonatomic, assign) float         cellHeight;
 @end
 @implementation SUScreenView
 - (id)initWithFrame:(CGRect)frame style:(SUScreenViewStyle)style{
@@ -73,17 +75,27 @@
         self.cells = [NSMutableArray new];
     }
     [self.cells removeAllObjects];
-    if ([self.delegate respondsToSelector:@selector(ghScreenViewOptionNumber)]) {
-        num = [self.delegate ghScreenViewOptionNumber];
+    if ([self.delegate respondsToSelector:@selector(suScreenViewOptionNumber)]) {
+        num = [self.delegate suScreenViewOptionNumber];
     }
+    
     float width = (self.style == SUScreenViewStyleDrop)?SUScreenWidth:SUSideViewWidth;
+    float viewH = 0;
     for (int index = 0; index < num; index ++) {
-        SUScreenOptionCell *cell = [self.delegate ghScreenViewCellForIndex:index];
-        cell.frame = CGRectMake(0, 80*index, width, 80);
+        float height = SUCellDefaltHeight;
+        if([self.delegate respondsToSelector:@selector(suScreenViewCellHeightForIndex:)]){
+            height = [self.delegate suScreenViewCellHeightForIndex:index];
+        }
+        SUScreenOptionCell *cell = [self.delegate suScreenViewCellForIndex:index];
+        cell.frame = CGRectMake(0, viewH, width, height);
+        if(cell.style == SUScreenCellStyleOther && [self.delegate respondsToSelector:@selector(suCustomViewForCellIndex:)]){//自定义布局
+            cell.customView = [self.delegate suCustomViewForCellIndex:index];
+        }
         [self.mainScroll addSubview:cell];
         [self.cells addObject:cell];
+        viewH += height;
     }
-    self.mainScroll.contentSize = CGSizeMake(width, 80*num);
+    self.mainScroll.contentSize = CGSizeMake(width, viewH);
 }
 
 #pragma mark - event
@@ -91,17 +103,17 @@
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     if(self.style == SUScreenViewStyleDrop){//下拉
         self.maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-        [SUHelper layoutViewHeightWith:self.mainView height:0];
+        [SUScreenHelper layoutViewHeightWith:self.mainView height:0];
         [UIView animateWithDuration:.2 animations:^{
             self.maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
-            [SUHelper layoutViewHeightWith:self.mainView height:SUDropViewHeight];
+            [SUScreenHelper layoutViewHeightWith:self.mainView height:SUDropViewHeight];
         } completion:nil];
     } else {
         self.maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-        [SUHelper layoutViewWidthWith:self.mainView left:SUScreenWidth];
+        [SUScreenHelper layoutViewWidthWith:self.mainView left:SUScreenWidth];
         [UIView animateWithDuration:.2 animations:^{
             self.maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.4];
-            [SUHelper layoutViewWidthWith:self.mainView left:SUScreenWidth-SUSideViewWidth];
+            [SUScreenHelper layoutViewWidthWith:self.mainView left:SUScreenWidth-SUSideViewWidth];
         } completion:nil];
     }
 }
@@ -110,14 +122,14 @@
     if(self.style == SUScreenViewStyleDrop){//下拉
         [UIView animateWithDuration:.2 animations:^{
             self.maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-            [SUHelper layoutViewHeightWith:self.mainView height:0];
+            [SUScreenHelper layoutViewHeightWith:self.mainView height:0];
         } completion:^(BOOL finished) {
             [self removeFromSuperview];
         }];
     } else {
         [UIView animateWithDuration:.2 animations:^{
             self.maskView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
-            [SUHelper layoutViewWidthWith:self.mainView left:SUScreenWidth];
+            [SUScreenHelper layoutViewWidthWith:self.mainView left:SUScreenWidth];
         } completion:^(BOOL finished) {
             [self removeFromSuperview];
         }];
@@ -207,7 +219,7 @@
         [cell resetValue];
     }
     NSMutableDictionary *dict           = [NSMutableDictionary new];
-    [self.delegate ghScreenViewSearchEvent:dict];
+    [self.delegate suScreenViewSearchEvent:dict];
     [self close];
 }
 
@@ -217,7 +229,7 @@
         SUScreenOptionCell *cell = [self.cells objectAtIndex:index];
         [dict addEntriesFromDictionary:cell.data];
     }
-    [self.delegate ghScreenViewSearchEvent:dict];
+    [self.delegate suScreenViewSearchEvent:dict];
     [self close];
 }
 

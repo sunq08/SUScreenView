@@ -8,6 +8,8 @@
 
 #define SUDropViewHeight    350//顶部筛选框的高度
 #define SUSideViewWidth     300//侧边筛选看的宽度
+
+#define SUCellDefaltHeight  80//cell默认高度
 //头部的颜色
 #define SUSideNavColor      [UIColor colorWithRed:249.0/255.0 green:249.0/255.0 blue:249.0/255.0 alpha:1.0f]
 
@@ -28,7 +30,7 @@
 
 #import "UITextFieldPicker.h"
 
-@interface SUHelper : NSObject
+@interface SUScreenHelper : NSObject
 /**设置圆角*/
 + (void)layoutViewRadioWith:(UIView *)view radio:(int)radio;
 /**设置高度*/
