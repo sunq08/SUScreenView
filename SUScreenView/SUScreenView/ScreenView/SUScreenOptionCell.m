@@ -32,17 +32,29 @@
 }
 
 - (void)initUI{
-    self.titleLab.frame             = CGRectMake(15, 15, SUScreenWidth - 30, 21);
     [self addSubview:self.titleLab];
     if(self.style == SUScreenCellStyleInput) {//输入框
-        self.mainTF.frame           = CGRectMake(15, 44, SUScreenWidth - 30, 30);
         [self addSubview:self.mainTF];
     } else if (self.style == SUScreenCellStyleSelect) {//选择框
-        self.mainPicker.frame       = CGRectMake(15, 44, SUScreenWidth - 30, 30);
         [self addSubview:self.mainPicker];
     } else if (self.style == SUScreenCellStyleRadio) {//单选
-        self.mainRadio.frame        = CGRectMake(15, 44, SUScreenWidth - 30, 30);
         [self addSubview:self.mainRadio];
+    } else {
+        NSLog(@"错误的cell类型");
+    }
+}
+
+- (void)layoutSubviews{
+    [super layoutSubviews];
+    
+    float width = self.frame.size.width;
+    self.titleLab.frame             = CGRectMake(15, 15, width - 30, 21);
+    if(self.style == SUScreenCellStyleInput) {//输入框
+        self.mainTF.frame           = CGRectMake(15, 44, width - 30, 30);
+    } else if (self.style == SUScreenCellStyleSelect) {//选择框
+        self.mainPicker.frame       = CGRectMake(15, 44, width - 30, 30);
+    } else if (self.style == SUScreenCellStyleRadio) {//单选
+        self.mainRadio.frame        = CGRectMake(15, 44, width - 30, 30);
     } else {
         NSLog(@"错误的cell类型");
     }

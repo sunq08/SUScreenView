@@ -20,6 +20,12 @@
     view.frame = frame;
 }
 
++ (void)layoutViewWidthWith:(UIView *)view left:(float)left{
+    CGRect frame = view.frame;
+    frame.origin.x = left;
+    view.frame = frame;
+}
+
 + (UIImage *)imageWithColor:(UIColor *)color {
     CGRect rect = CGRectMake(0.0f, 0.0f, 1.0f, 1.0f);
     UIGraphicsBeginImageContext(rect.size);
@@ -32,5 +38,18 @@
     UIGraphicsEndImageContext();
     
     return image;
+}
+
++ (UIViewController *)getSuperViewController:(UIView *)view {
+    
+    id nextResponder = [view nextResponder];
+    while (nextResponder != nil) {
+        if ([nextResponder isKindOfClass:[UIViewController class]]) {
+            UIViewController *vc = (UIViewController *)nextResponder;
+            return vc;
+        }
+        nextResponder = [nextResponder nextResponder];
+    }
+    return nil;
 }
 @end

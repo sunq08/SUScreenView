@@ -6,8 +6,10 @@
 //  Copyright © 2019年 sunq. All rights reserved.
 //
 
-#define SUTopViewHeight     350//顶部筛选框的高度
+#define SUDropViewHeight    350//顶部筛选框的高度
 #define SUSideViewWidth     300//侧边筛选看的宽度
+//头部的颜色
+#define SUSideNavColor      [UIColor colorWithRed:249.0/255.0 green:249.0/255.0 blue:249.0/255.0 alpha:1.0f]
 
 //重置按钮背景颜色，默认(206, 238, 248, 1)，淡蓝
 #define resetBgColor [UIColor colorWithRed:206.0/255.0 green:238.0/255.0 blue:248.0/255.0 alpha:1.0f]
@@ -31,6 +33,10 @@
 + (void)layoutViewRadioWith:(UIView *)view radio:(int)radio;
 /**设置高度*/
 + (void)layoutViewHeightWith:(UIView *)view height:(float)height;
+/**设置宽度*/
++ (void)layoutViewWidthWith:(UIView *)view left:(float)left;
 /** 根据颜色获取图片*/
 + (UIImage *)imageWithColor:(UIColor *)color;
+/** 获取上级controller*/
++ (UIViewController *)getSuperViewController:(UIView *)view;
 @end
