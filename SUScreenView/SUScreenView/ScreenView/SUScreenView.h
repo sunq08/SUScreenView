@@ -36,6 +36,8 @@ typedef enum SUScreenViewStyle {
 - (id)initWithFrame:(CGRect)frame style:(SUScreenViewStyle)style;
 /** 代理*/
 @property (nonatomic, assign) id<SUScreenViewDelegate> delegate;
+/** 给vc添加侧滑功能*/
+- (void)addPanEventWithVC:(UIViewController *)viewController;
 /** 弹窗打开*/
 - (void)show;
 /** 初始化，设置完数据源后调用*/

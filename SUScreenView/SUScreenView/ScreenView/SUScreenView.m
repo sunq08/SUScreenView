@@ -99,6 +99,24 @@
 }
 
 #pragma mark - event
+- (void)addPanEventWithVC:(UIViewController *)viewController{
+    UIScreenEdgePanGestureRecognizer *edgePan = [[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(edgePanEvent:)];
+    edgePan.edges = (self.style == SUScreenViewStyleDrop)?UIRectEdgeTop:UIRectEdgeRight;
+    [viewController.view addGestureRecognizer:edgePan];
+}
+
+- (void)edgePanEvent:(UIScreenEdgePanGestureRecognizer *)sender {
+    if(self.style == SUScreenViewStyleDrop){
+        if (sender.edges == UIRectEdgeTop && sender.state == UIGestureRecognizerStateBegan) {
+            [self show];
+        }
+    }else{
+        if (sender.edges == UIRectEdgeRight && sender.state == UIGestureRecognizerStateBegan) {
+            [self show];
+        }
+    }
+}
+
 - (void)show{
     [[UIApplication sharedApplication].keyWindow addSubview:self];
     if(self.style == SUScreenViewStyleDrop){//下拉

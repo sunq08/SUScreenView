@@ -18,23 +18,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.screenViewSide = [[SUScreenView alloc]initWithFrame:self.view.bounds style:SUScreenViewStyleSide];
+    self.screenViewSide.delegate = self;
+    //需要添加手势的话需要在viewdidload里面就把菜单创建好，不能使用懒加载！
+    [self.screenViewSide addPanEventWithVC:self];
+    [self.screenViewSide reloadData];
 }
 
 - (SUScreenView *)screenViewDrop{
     if(!_screenViewDrop){
         _screenViewDrop = [[SUScreenView alloc]initWithFrame:self.view.bounds style:SUScreenViewStyleDrop];
         _screenViewDrop.delegate = self;
+        [_screenViewDrop addPanEventWithVC:self];
         [_screenViewDrop reloadData];
     }
     return _screenViewDrop;
-}
-- (SUScreenView *)screenViewSide{
-    if(!_screenViewSide){
-        _screenViewSide = [[SUScreenView alloc]initWithFrame:self.view.bounds style:SUScreenViewStyleSide];
-        _screenViewSide.delegate = self;
-        [_screenViewSide reloadData];
-    }
-    return _screenViewSide;
 }
 
 - (NSInteger)suScreenViewOptionNumber{
