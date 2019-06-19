@@ -28,7 +28,7 @@
 #define SUNavBarHeight 44.0
 #define SUTopHeight (SUStatusBarHeight + SUNavBarHeight)
 
-#import "UITextFieldPicker.h"
+#import <UIKit/UIKit.h>
 
 @interface SUScreenHelper : NSObject
 /**设置圆角*/

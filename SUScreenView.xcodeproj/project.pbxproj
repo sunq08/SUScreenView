@@ -13,9 +13,8 @@
 		FF10BDB422B2350D00454AD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF10BDB322B2350D00454AD6 /* Assets.xcassets */; };
 		FF10BDB722B2350D00454AD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF10BDB522B2350D00454AD6 /* LaunchScreen.storyboard */; };
 		FF10BDBA22B2350D00454AD6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10BDB922B2350D00454AD6 /* main.m */; };
+		FFA19AF322BA203B00832D2B /* SUTextFiledPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA19AF222BA203B00832D2B /* SUTextFiledPicker.m */; };
 		FFE9DE6F22B2728400A0DF8D /* SUScreenConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE9DE6422B2728400A0DF8D /* SUScreenConfig.m */; };
-		FFE9DE7022B2728400A0DF8D /* UITextFieldDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE9DE6622B2728400A0DF8D /* UITextFieldDatePicker.m */; };
-		FFE9DE7122B2728400A0DF8D /* UITextFieldPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE9DE6722B2728400A0DF8D /* UITextFieldPicker.m */; };
 		FFE9DE7222B2728400A0DF8D /* SUScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE9DE6B22B2728400A0DF8D /* SUScreenView.m */; };
 		FFE9DE7322B2728400A0DF8D /* SUScreenOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE9DE6E22B2728400A0DF8D /* SUScreenOptionCell.m */; };
 /* End PBXBuildFile section */
@@ -31,12 +30,10 @@
 		FF10BDB622B2350D00454AD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF10BDB822B2350D00454AD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF10BDB922B2350D00454AD6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FFA19AF122BA203B00832D2B /* SUTextFiledPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUTextFiledPicker.h; sourceTree = "<group>"; };
+		FFA19AF222BA203B00832D2B /* SUTextFiledPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUTextFiledPicker.m; sourceTree = "<group>"; };
 		FFE9DE6322B2728400A0DF8D /* SUScreenConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUScreenConfig.h; sourceTree = "<group>"; };
 		FFE9DE6422B2728400A0DF8D /* SUScreenConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUScreenConfig.m; sourceTree = "<group>"; };
-		FFE9DE6622B2728400A0DF8D /* UITextFieldDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldDatePicker.m; sourceTree = "<group>"; };
-		FFE9DE6722B2728400A0DF8D /* UITextFieldPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UITextFieldPicker.m; sourceTree = "<group>"; };
-		FFE9DE6822B2728400A0DF8D /* UITextFieldPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldPicker.h; sourceTree = "<group>"; };
-		FFE9DE6922B2728400A0DF8D /* UITextFieldDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UITextFieldDatePicker.h; sourceTree = "<group>"; };
 		FFE9DE6B22B2728400A0DF8D /* SUScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUScreenView.m; sourceTree = "<group>"; };
 		FFE9DE6C22B2728400A0DF8D /* SUScreenOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUScreenOptionCell.h; sourceTree = "<group>"; };
 		FFE9DE6D22B2728400A0DF8D /* SUScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUScreenView.h; sourceTree = "<group>"; };
@@ -133,10 +130,8 @@
 		FFE9DE6522B2728400A0DF8D /* DataPicker */ = {
 			isa = PBXGroup;
 			children = (
-				FFE9DE6922B2728400A0DF8D /* UITextFieldDatePicker.h */,
-				FFE9DE6622B2728400A0DF8D /* UITextFieldDatePicker.m */,
-				FFE9DE6822B2728400A0DF8D /* UITextFieldPicker.h */,
-				FFE9DE6722B2728400A0DF8D /* UITextFieldPicker.m */,
+				FFA19AF122BA203B00832D2B /* SUTextFiledPicker.h */,
+				FFA19AF222BA203B00832D2B /* SUTextFiledPicker.m */,
 			);
 			path = DataPicker;
 			sourceTree = "<group>";
@@ -223,11 +218,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFE9DE7322B2728400A0DF8D /* SUScreenOptionCell.m in Sources */,
-				FFE9DE7022B2728400A0DF8D /* UITextFieldDatePicker.m in Sources */,
+				FFA19AF322BA203B00832D2B /* SUTextFiledPicker.m in Sources */,
 				FF10BDAF22B2350100454AD6 /* ViewController.m in Sources */,
 				FFE9DE7222B2728400A0DF8D /* SUScreenView.m in Sources */,
 				FFE9DE6F22B2728400A0DF8D /* SUScreenConfig.m in Sources */,
-				FFE9DE7122B2728400A0DF8D /* UITextFieldPicker.m in Sources */,
 				FF10BDBA22B2350D00454AD6 /* main.m in Sources */,
 				FF10BDAC22B2350100454AD6 /* AppDelegate.m in Sources */,
 			);

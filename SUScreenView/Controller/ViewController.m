@@ -36,8 +36,9 @@
     return _screenViewDrop;
 }
 
+#pragma mark - screen view
 - (NSInteger)suScreenViewOptionNumber{
-    return 4;
+    return 5;
 }
 
 - (SUScreenOptionCell *)suScreenViewCellForIndex:(NSInteger)index{
@@ -50,11 +51,15 @@
         cell.pickerData = @{@"1":@"全部",@"2":@"已读",@"3":@"未读"};
         cell.title = @"消息状态";
         return cell;
-    }  else if(index == 2){
+    } else if(index == 2){
+        SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleDatePicker identifier:@"addTime"];
+        cell.title = @"开始时间";
+        return cell;
+    } else if(index == 3){
         SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleOther identifier:@"type"];
         cell.title = @"自定义布局";
         return cell;
-    }else {
+    } else {
         SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleRadio identifier:@"title"];
         cell.title = @"我发起的";
         return cell;
@@ -62,14 +67,14 @@
 }
 
 - (CGFloat)suScreenViewCellHeightForIndex:(NSInteger)index{
-    if(index == 2){
+    if(index == 3){
         return 100;
     }
     return 80;
 }
 
 - (UIView *)suCustomViewForCellIndex:(NSInteger)index{
-    if(index == 2){
+    if(index == 3){
         UIView *view = [[UIView alloc]init];
         view.backgroundColor = [UIColor yellowColor];
         return view;
@@ -81,6 +86,7 @@
     NSLog(@"%@",dict);
 }
 
+#pragma mark - table view
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 2;
 }

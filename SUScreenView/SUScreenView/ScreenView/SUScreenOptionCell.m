@@ -7,14 +7,15 @@
 //
 
 #import "SUScreenOptionCell.h"
-
+#import "SUTextFiledPicker.h"
 #import "SUScreenConfig.h"
 @interface SUScreenOptionCell()
 
 @property (nonatomic ,  copy) NSString              *identifier;//identifier
 @property (nonatomic ,strong) UILabel               *titleLab;//title
 @property (nonatomic ,strong) UITextField           *mainTF;//tf
-@property (nonatomic ,strong) UITextFieldPicker     *mainPicker;//picker
+@property (nonatomic ,strong) SUTextFiledPicker     *mainPicker;//picker
+@property (nonatomic ,strong) SUTextFiledPicker     *mainDatePicker;//datepicker
 @property (nonatomic ,strong) UIButton              *mainRadio;//radio
 @end
 
@@ -39,6 +40,8 @@
         [self addSubview:self.mainPicker];
     } else if (self.style == SUScreenCellStyleRadio) {//单选
         [self addSubview:self.mainRadio];
+    } else if (self.style == SUScreenCellStyleDatePicker) {//时间
+        [self addSubview:self.mainDatePicker];
     } else if (self.style == SUScreenCellStyleOther) {//自定义类型
         
     } else {
@@ -58,6 +61,8 @@
         self.mainPicker.frame       = CGRectMake(15, 44, width - 30, 30);
     } else if (self.style == SUScreenCellStyleRadio) {//单选
         self.mainRadio.frame        = CGRectMake(15, 44, width - 30, 30);
+    } else if (self.style == SUScreenCellStyleDatePicker) {//时间
+        self.mainDatePicker.frame   = CGRectMake(15, 44, width - 30, 30);
     } else if (self.style == SUScreenCellStyleOther) {//自定义布局
         self.customView.frame       = CGRectMake(15, 44, width - 30, height-44-6);
     } else {
@@ -88,17 +93,31 @@
     return _mainTF;
 }
 
-- (UITextFieldPicker *)mainPicker{
+- (SUTextFiledPicker *)mainPicker{
     if(!_mainPicker){
-        _mainPicker                     = [[UITextFieldPicker alloc]init];
+        _mainPicker                     = [SUTextFiledPicker creatTextFiledWithStyle:SUTextFiledCommonPicker];
         _mainPicker.font                = [UIFont systemFontOfSize:13];
         _mainPicker.borderStyle         = UITextBorderStyleNone;
         _mainPicker.backgroundColor     = [UIColor whiteColor];
         _mainPicker.leftView            = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
         _mainPicker.leftViewMode        = UITextFieldViewModeAlways;
+        _mainPicker.showToolBar         = YES;
         [SUScreenHelper layoutViewRadioWith:_mainPicker radio:2];
     }
     return _mainPicker;
+}
+
+- (SUTextFiledPicker *)mainDatePicker{
+    if(!_mainDatePicker){
+        _mainDatePicker                 = [SUTextFiledPicker creatTextFiledWithStyle:SUTextFiledTimePicker];
+        _mainDatePicker.font            = [UIFont systemFontOfSize:13];
+        _mainDatePicker.borderStyle     = UITextBorderStyleNone;
+        _mainDatePicker.backgroundColor = [UIColor whiteColor];
+        _mainDatePicker.leftView        = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
+        _mainDatePicker.leftViewMode    = UITextFieldViewModeAlways;
+        [SUScreenHelper layoutViewRadioWith:_mainDatePicker radio:2];
+    }
+    return _mainDatePicker;
 }
 
 - (UIButton *)mainRadio{
@@ -122,8 +141,11 @@
     if(self.style == SUScreenCellStyleSelect && ![self.mainPicker.text isEqualToString:@""]){
         return @{self.identifier:self.mainPicker.text};
     }
-    if(self.style == SUScreenCellStyleRadio && ![self.mainPicker.text isEqualToString:@""]){
+    if(self.style == SUScreenCellStyleRadio){
         return @{self.identifier:self.mainRadio.selected?@"1":@"0"};
+    }
+    if(self.style == SUScreenCellStyleDatePicker && ![self.mainDatePicker.text isEqualToString:@""]){
+        return @{self.identifier:self.mainDatePicker.text};
     }
     return @{};
 }
@@ -143,6 +165,8 @@
         self.mainTF.placeholder = [NSString stringWithFormat:@"请输入%@",title];
     } else if (self.style == SUScreenCellStyleSelect){
         self.mainPicker.placeholder = [NSString stringWithFormat:@"请选择%@",title];
+    } else if (self.style == SUScreenCellStyleDatePicker){
+        self.mainDatePicker.placeholder = [NSString stringWithFormat:@"请选择%@",title];
     }
 }
 
@@ -163,9 +187,11 @@
     if(self.style == SUScreenCellStyleInput){
         self.mainTF.text = @"";
     } else if (self.style == SUScreenCellStyleSelect){
-        self.mainPicker.val = @"";
-    }  else if (self.style == SUScreenCellStyleRadio){
+        [self.mainPicker reset];
+    } else if (self.style == SUScreenCellStyleRadio){
         self.mainRadio.selected = NO;
+    } else if (self.style == SUScreenCellStyleDatePicker){
+        self.mainDatePicker.text = @"";
     }
 }
 @end
