@@ -121,7 +121,7 @@
                         break;
                     }
                 }
-                [pickerView selectRow:index inComponent:0 animated:NO];
+                [_pickerView selectRow:index inComponent:0 animated:NO];
             }
         }
     }
