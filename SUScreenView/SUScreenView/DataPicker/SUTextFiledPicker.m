@@ -8,6 +8,9 @@
 
 #import "SUTextFiledPicker.h"
 #import "SUScreenConfig.h"
+
+static NSString  * const formatD = @"yyyy.MM.dd HH:mm:ss";
+
 @interface SUTextFiledPicker()<UIPickerViewDelegate, UIPickerViewDataSource>
 @property (nonatomic,strong) UIPickerView *pickerView;
 @property (nonatomic,strong) UIDatePicker *datePicker;
@@ -44,7 +47,7 @@
     
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 44)];
     toolbar.tintColor = [UIColor blueColor];
-    UIBarButtonItem *clear = [[UIBarButtonItem alloc] initWithTitle:@"清除" style:UIBarButtonItemStylePlain target:self action:@selector(reset)];
+    UIBarButtonItem *clear = [[UIBarButtonItem alloc] initWithTitle:@"清除" style:UIBarButtonItemStylePlain target:self action:@selector(clearDone)];
     clear.tintColor = SUToolbarTintColor;
     UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem *down = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(selectDone)];
@@ -86,9 +89,11 @@
         }
     }else{
         self.text = val;
-        NSDateFormatter *format = [[NSDateFormatter alloc] init];
-        [format setDateFormat:@"yyyy.MM.dd HH:mm:ss"];
-        _datePicker.date = [format dateFromString:val];
+        if(![val isEqualToString:@""]){
+            NSDateFormatter *format = [[NSDateFormatter alloc] init];
+            [format setDateFormat:formatD];
+            _datePicker.date = [format dateFromString:val];
+        }
     }
 }
 
@@ -144,15 +149,16 @@
 }
 
 #pragma mark - private function
-- (void)reset{
+- (void)clearDone{
     self.val = @"";
+    [self resignFirstResponder];
 }
 
 - (void)selectDone{
     if(self.style == SUTextFiledTimePicker){
         NSDateFormatter *format = [[NSDateFormatter alloc] init];
-        [format setDateFormat:@"yyyy.MM.dd HH:mm:ss"];
-        self.text = [format stringFromDate:_datePicker.date];
+        [format setDateFormat:formatD];
+        self.val = [format stringFromDate:_datePicker.date];
     }else{
         NSArray *dataKey = [self.pickerData allKeys];
         NSInteger row = [self.pickerView selectedRowInComponent:0];

@@ -18,6 +18,8 @@ typedef enum SUScreenOptionCellStyle {
     SUScreenCellStyleOther      = 99,       //其他，自定义布局，不过好像没啥用，只能展示布局
 }SUScreenOptionCellStyle;
 
+typedef void (^SUScreenCellValueChanged) (NSString *value,NSString *identifier);
+
 @interface SUScreenOptionCell : UIView
 /** identifier:当前cell的标识，用于获取data时的key，同一个筛选框中的identifier需要唯一*/
 - (id)initWithFrame:(CGRect)frame style:(SUScreenOptionCellStyle)style identifier:(NSString *)identifier;
@@ -33,6 +35,8 @@ typedef enum SUScreenOptionCellStyle {
 @property (nonatomic, strong, readonly) NSDictionary *data;
 /** 重置*/
 - (void)resetValue;
+/** 监听内容改变，注意弱引用*/
+@property (nonatomic,   copy) SUScreenCellValueChanged   valueChanged;
 @end
 
 NS_ASSUME_NONNULL_END

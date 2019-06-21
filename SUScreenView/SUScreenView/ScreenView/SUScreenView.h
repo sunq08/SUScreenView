@@ -29,6 +29,8 @@ typedef enum SUScreenViewStyle {
 - (CGFloat)suScreenViewCellHeightForIndex:(NSInteger)index;
 /** 自定义视图的cell设置内容*/
 - (UIView *)suCustomViewForCellIndex:(NSInteger)index;
+/** 监听cell内容改变*/
+- (void)suCellValueChangeWithIndex:(NSInteger)index value:(NSString *)value identifier:(NSString *)identifier;
 @end
 
 @interface SUScreenView : UIView
@@ -42,6 +44,8 @@ typedef enum SUScreenViewStyle {
 - (void)show;
 /** 初始化，设置完数据源后调用*/
 - (void)reloadData;
+/** 初始化，设置完数据源后调用*/
+- (void)reloadCellWith:(NSInteger)index title:(NSString *)title data:(NSDictionary *)data;
 @end
 
 NS_ASSUME_NONNULL_END

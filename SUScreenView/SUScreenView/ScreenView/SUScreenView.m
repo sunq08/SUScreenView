@@ -98,6 +98,20 @@
     self.mainScroll.contentSize = CGSizeMake(width, viewH);
 }
 
+- (void)reloadCellWith:(NSInteger)index title:(NSString *)title data:(NSDictionary *)data{
+    if(index >= self.cells.count){
+        NSLog(@"数组越界了！检查一下是不是哪里写错了");
+        return;
+    }
+    SUScreenOptionCell *cell = self.cells[index];
+    if(title && [title isKindOfClass:[NSString class]] && ![title isEqualToString:@""]){
+        cell.title = title;
+    }
+    if(data && [data isKindOfClass:[NSDictionary class]]){
+        cell.pickerData = data;
+    }
+}
+
 #pragma mark - event
 - (void)addPanEventWithVC:(UIViewController *)viewController{
     UIScreenEdgePanGestureRecognizer *edgePan = [[UIScreenEdgePanGestureRecognizer alloc]initWithTarget:self action:@selector(edgePanEvent:)];

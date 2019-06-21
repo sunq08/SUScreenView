@@ -88,6 +88,7 @@
         _mainTF.backgroundColor     = [UIColor whiteColor];
         _mainTF.leftView            = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
         _mainTF.leftViewMode        = UITextFieldViewModeAlways;
+        [_mainTF addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingDidEnd];
         [SUScreenHelper layoutViewRadioWith:_mainTF radio:2];
     }
     return _mainTF;
@@ -101,6 +102,7 @@
         _mainPicker.backgroundColor     = [UIColor whiteColor];
         _mainPicker.leftView            = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
         _mainPicker.leftViewMode        = UITextFieldViewModeAlways;
+        [_mainPicker addTarget:self action:@selector(pickerValueChanged:) forControlEvents:UIControlEventEditingDidEnd];
         [SUScreenHelper layoutViewRadioWith:_mainPicker radio:2];
     }
     return _mainPicker;
@@ -114,6 +116,7 @@
         _mainDatePicker.backgroundColor = [UIColor whiteColor];
         _mainDatePicker.leftView        = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
         _mainDatePicker.leftViewMode    = UITextFieldViewModeAlways;
+        [_mainDatePicker addTarget:self action:@selector(pickerValueChanged:) forControlEvents:UIControlEventEditingDidEnd];
         [SUScreenHelper layoutViewRadioWith:_mainDatePicker radio:2];
     }
     return _mainDatePicker;
@@ -134,16 +137,16 @@
 }
 
 - (NSDictionary *)data{
-    if(self.style == SUScreenCellStyleInput && ![self.mainTF.text isEqualToString:@""]){
+    if(self.style == SUScreenCellStyleInput){
         return @{self.identifier:self.mainTF.text};
     }
-    if(self.style == SUScreenCellStyleSelect && ![self.mainPicker.text isEqualToString:@""]){
+    if(self.style == SUScreenCellStyleSelect){
         return @{self.identifier:self.mainPicker.text};
     }
     if(self.style == SUScreenCellStyleRadio){
         return @{self.identifier:self.mainRadio.selected?@"1":@"0"};
     }
-    if(self.style == SUScreenCellStyleDatePicker && ![self.mainDatePicker.text isEqualToString:@""]){
+    if(self.style == SUScreenCellStyleDatePicker){
         return @{self.identifier:self.mainDatePicker.text};
     }
     return @{};
@@ -180,6 +183,9 @@
 #pragma mark - privately
 - (void)radioClick:(UIButton *)sender{
     sender.selected = !sender.selected;
+    if(self.valueChanged){
+        self.valueChanged(sender.selected?@"1":@"0", self.identifier);
+    }
 }
 
 - (void)resetValue{
@@ -193,4 +199,16 @@
         self.mainDatePicker.val = @"";
     }
 }
+
+- (void)textFieldValueChanged:(UITextField *)sender{
+    if(self.valueChanged){
+        self.valueChanged(sender.text, self.identifier);
+    }
+}
+- (void)pickerValueChanged:(SUTextFiledPicker *)sender{
+    if(self.valueChanged){
+        self.valueChanged(sender.val, self.identifier);
+    }
+}
+
 @end

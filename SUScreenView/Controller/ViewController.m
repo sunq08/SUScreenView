@@ -19,6 +19,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"SUScreenView";
+    self.view.backgroundColor = [UIColor whiteColor];
+    
     self.screenViewSide = [[SUScreenView alloc]initWithFrame:self.view.bounds style:SUScreenViewStyleSide];
     self.screenViewSide.delegate = self;
     //需要添加手势的话需要在viewdidload里面就把菜单创建好，不能使用懒加载！
@@ -45,15 +48,24 @@
     if(index == 0){
         SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleInput identifier:@"sendUser"];
         cell.title = @"发送人";
+        cell.valueChanged = ^(NSString * _Nonnull value, NSString * _Nonnull identifier) {
+            NSLog(@"第%ld个cell内容改变了，改成了：%@，cell id为：%@",index,value,identifier);
+        };
         return cell;
     } else if(index == 1){
         SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleSelect identifier:@"type"];
         cell.pickerData = @{@"1":@"全部",@"2":@"已读",@"3":@"未读"};
         cell.title = @"消息状态";
+        cell.valueChanged = ^(NSString * _Nonnull value, NSString * _Nonnull identifier) {
+            NSLog(@"第%ld个cell内容改变了，改成了：%@，cell id为：%@",index,value,identifier);
+        };
         return cell;
     } else if(index == 2){
         SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleDatePicker identifier:@"addTime"];
         cell.title = @"开始时间";
+        cell.valueChanged = ^(NSString * _Nonnull value, NSString * _Nonnull identifier) {
+            NSLog(@"第%ld个cell内容改变了，改成了：%@，cell id为：%@",index,value,identifier);
+        };
         return cell;
     } else if(index == 3){
         SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleOther identifier:@"type"];
@@ -62,6 +74,9 @@
     } else {
         SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleRadio identifier:@"title"];
         cell.title = @"我发起的";
+        cell.valueChanged = ^(NSString * _Nonnull value, NSString * _Nonnull identifier) {
+            NSLog(@"第%ld个cell内容改变了，改成了：%@，cell id为：%@",index,value,identifier);
+        };
         return cell;
     }
 }
@@ -86,6 +101,10 @@
     NSLog(@"%@",dict);
 }
 
+- (void)suCellValueChangeWithIndex:(NSInteger)index value:(NSString *)value identifier:(NSString *)identifier{
+    
+}
+
 #pragma mark - table view
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 2;
@@ -99,7 +118,7 @@
     }
     if(indexPath.row == 0){
         cell.textLabel.text = @"打开下拉弹窗";
-    }else{
+    }else if (indexPath.row == 1){
         cell.textLabel.text = @"打开侧滑弹窗";
     }
     
@@ -109,8 +128,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row == 0){
         [self.screenViewDrop show];
-    }else{
+    }else if (indexPath.row == 1){
         [self.screenViewSide show];
+    }else{
+
     }
 }
 @end
