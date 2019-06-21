@@ -212,8 +212,8 @@
         _resetBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_resetBtn setTitle:@"重置" forState:UIControlStateNormal];
         [_resetBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [_resetBtn setTitleColor:resetTextColor forState:UIControlStateNormal];
-        _resetBtn.backgroundColor = resetBgColor;
+        [_resetBtn setTitleColor:ResetTextColor forState:UIControlStateNormal];
+        _resetBtn.backgroundColor = ResetBgColor;
         [_resetBtn addTarget:self action:@selector(resetClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _resetBtn;
@@ -224,8 +224,8 @@
         _sureBtn = [UIButton buttonWithType:UIButtonTypeCustom];
         [_sureBtn setTitle:@"确定" forState:UIControlStateNormal];
         [_sureBtn.titleLabel setFont:[UIFont systemFontOfSize:15]];
-        [_sureBtn setTitleColor:sureTextColor forState:UIControlStateNormal];
-        _sureBtn.backgroundColor = sureBgColor;
+        [_sureBtn setTitleColor:SureTextColor forState:UIControlStateNormal];
+        _sureBtn.backgroundColor = SureBgColor;
         [_sureBtn addTarget:self action:@selector(sureClick) forControlEvents:UIControlEventTouchUpInside];
     }
     return _sureBtn;

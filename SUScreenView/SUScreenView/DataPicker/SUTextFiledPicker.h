@@ -18,16 +18,10 @@ typedef enum SUTextFiledPickerStyle {
 @interface SUTextFiledPicker : UITextField
 /** 快捷创建picker*/
 + (instancetype)creatTextFiledWithStyle:(SUTextFiledPickerStyle)style;
-/** 是否显示自定义toolbar 默认不显示
-    现在项目里很多用到类似于IQKeyboardManager等键盘管理工具，如果没有用的话可以使用这个参数显示toolbar
- */
-@property (nonatomic, assign) BOOL          showToolBar;
 /** 数据源*/
 @property (nonatomic, strong) NSDictionary  *pickerData;
 /** 取值*/
 @property (nonatomic, strong) NSString      *val;
-/** 重置*/
-- (void)reset;
 
 @end
 

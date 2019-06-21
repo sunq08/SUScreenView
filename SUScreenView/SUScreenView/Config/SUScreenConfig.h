@@ -10,23 +10,21 @@
 #define SUSideViewWidth     300//侧边筛选看的宽度
 
 #define SUCellDefaltHeight  80//cell默认高度
-//头部的颜色
-#define SUSideNavColor      [UIColor colorWithRed:249.0/255.0 green:249.0/255.0 blue:249.0/255.0 alpha:1.0f]
 
-//重置按钮背景颜色，默认(206, 238, 248, 1)，淡蓝
-#define resetBgColor [UIColor colorWithRed:206.0/255.0 green:238.0/255.0 blue:248.0/255.0 alpha:1.0f]
-//重置按钮字体颜色，默认(0, 186, 242, 1)，深蓝
-#define resetTextColor [UIColor colorWithRed:0.0/255.0 green:186.0/255.0 blue:242.0/255.0 alpha:1.0f]
-//确定按钮背景颜色，默认(0, 186, 242, 1)，深蓝
-#define sureBgColor [UIColor colorWithRed:0.0/255.0 green:186.0/255.0 blue:242.0/255.0 alpha:1.0f]
-//确定按钮字体颜色，默认白色
-#define sureTextColor [UIColor whiteColor]
+#define SUSideNavColor      surgb(249.0,249.0,249.0)//头部的颜色
 
-#define SUScreenWidth   [UIScreen mainScreen].bounds.size.width
-#define SUScreenHeight  [UIScreen mainScreen].bounds.size.height
-#define SUStatusBarHeight [[UIApplication sharedApplication] statusBarFrame].size.height
+#define ResetBgColor        surgb(206.0,238.0,248.0)//重置按钮背景颜色，默认淡蓝
+#define ResetTextColor      surgb(0.0,186.0,242.0)//重置按钮字体颜色，默认深蓝
+#define SureBgColor         surgb(0.0,186.0,242.0)//确定按钮背景颜色，默认深蓝
+#define SureTextColor       [UIColor whiteColor]//确定按钮字体颜色，默认白色
+
+#define SUToolbarTintColor  [UIColor darkGrayColor]//toolbar按钮颜色
+
+#define SUScreenWidth       [UIScreen mainScreen].bounds.size.width
+#define SUScreenHeight      [UIScreen mainScreen].bounds.size.height
+#define SUStatusBarHeight   [[UIApplication sharedApplication] statusBarFrame].size.height
 #define SUNavBarHeight 44.0
-#define SUTopHeight (SUStatusBarHeight + SUNavBarHeight)
+#define SUTopHeight         (SUStatusBarHeight + SUNavBarHeight)
 
 #import <UIKit/UIKit.h>
 
@@ -42,3 +40,5 @@
 /** 获取上级controller*/
 + (UIViewController *)getSuperViewController:(UIView *)view;
 @end
+/** 通过RGB创建颜色 rgb(173.0,23.0,11.0)*/
+UIColor *surgb(CGFloat red, CGFloat green, CGFloat blue);

@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "IQKeyboardManager.h"
 @interface AppDelegate ()
 
 @end
@@ -17,8 +17,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self keyBoardHandle];
     return YES;
 }
+
+#pragma mark - 测试一下toolbar 和 IQKeyboardManager是否会有冲突
+- (void)keyBoardHandle{
+    IQKeyboardManager *keyboardManager = [IQKeyboardManager sharedManager];
+    keyboardManager.enable = YES;
+    keyboardManager.shouldResignOnTouchOutside = YES;
+    keyboardManager.toolbarManageBehaviour = IQAutoToolbarByPosition;
+    keyboardManager.enableAutoToolbar = YES;
+    keyboardManager.keyboardDistanceFromTextField = 5.0f;
+}
+
 
 
 - (void)applicationWillResignActive:(UIApplication *)application {

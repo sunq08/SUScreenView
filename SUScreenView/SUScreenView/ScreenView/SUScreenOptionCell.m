@@ -101,7 +101,6 @@
         _mainPicker.backgroundColor     = [UIColor whiteColor];
         _mainPicker.leftView            = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
         _mainPicker.leftViewMode        = UITextFieldViewModeAlways;
-        _mainPicker.showToolBar         = YES;
         [SUScreenHelper layoutViewRadioWith:_mainPicker radio:2];
     }
     return _mainPicker;
@@ -126,7 +125,7 @@
         [_mainRadio setTitle:@"是" forState:UIControlStateNormal];
         [_mainRadio.titleLabel setFont:[UIFont systemFontOfSize:14]];
         [_mainRadio setBackgroundImage:[SUScreenHelper imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
-        [_mainRadio setBackgroundImage:[SUScreenHelper imageWithColor:resetBgColor] forState:UIControlStateSelected];
+        [_mainRadio setBackgroundImage:[SUScreenHelper imageWithColor:ResetBgColor] forState:UIControlStateSelected];
         [_mainRadio setTitleColor:[UIColor darkGrayColor] forState:UIControlStateNormal];
         [_mainRadio setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
         [_mainRadio addTarget:self action:@selector(radioClick:) forControlEvents:UIControlEventTouchUpInside];
@@ -187,11 +186,11 @@
     if(self.style == SUScreenCellStyleInput){
         self.mainTF.text = @"";
     } else if (self.style == SUScreenCellStyleSelect){
-        [self.mainPicker reset];
+        self.mainPicker.val = @"";
     } else if (self.style == SUScreenCellStyleRadio){
         self.mainRadio.selected = NO;
     } else if (self.style == SUScreenCellStyleDatePicker){
-        self.mainDatePicker.text = @"";
+        self.mainDatePicker.val = @"";
     }
 }
 @end
