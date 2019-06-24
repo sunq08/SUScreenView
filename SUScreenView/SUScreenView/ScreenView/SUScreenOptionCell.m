@@ -207,7 +207,7 @@
 }
 - (void)pickerValueChanged:(SUTextFiledPicker *)sender{
     if(self.valueChanged){
-        self.valueChanged(sender.val, self.identifier);
+        self.valueChanged(sender.val?sender.val:@"", self.identifier);
     }
 }
 

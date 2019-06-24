@@ -14,7 +14,7 @@ typedef enum SUScreenOptionCellStyle {
     SUScreenCellStyleSelect     = 1,        //select
     SUScreenCellStyleRadio      = 2,        //单选确认
     SUScreenCellStyleDatePicker = 3,        //选择时间
-    SUScreenCellStyleCardPicker = 4,        //卡片视图选择
+    SUScreenCellStyleCardPicker = 4,        //卡片视图选择，暂未实现
     SUScreenCellStyleOther      = 99,       //其他，自定义布局，不过好像没啥用，只能展示布局
 }SUScreenOptionCellStyle;
 
@@ -29,14 +29,15 @@ typedef void (^SUScreenCellValueChanged) (NSString *value,NSString *identifier);
 @property (nonatomic ,  copy) NSString          *title;
 /** 选择框的数据源,style=SUScreenCellStyleSelect有效*/
 @property (nonatomic, strong) NSDictionary      *pickerData;
+/** 监听内容改变，注意弱引用*/
+@property (nonatomic,   copy) SUScreenCellValueChanged   valueChanged;
+
 /** 自定义视图,style=SUScreenCellStyleOther有效*/
 @property (nonatomic, strong) UIView            *customView;
 /** 获取值*/
 @property (nonatomic, strong, readonly) NSDictionary *data;
 /** 重置*/
 - (void)resetValue;
-/** 监听内容改变，注意弱引用*/
-@property (nonatomic,   copy) SUScreenCellValueChanged   valueChanged;
 @end
 
 NS_ASSUME_NONNULL_END

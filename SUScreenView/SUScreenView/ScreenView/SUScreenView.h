@@ -44,7 +44,7 @@ typedef enum SUScreenViewStyle {
 - (void)show;
 /** 初始化，设置完数据源后调用*/
 - (void)reloadData;
-/** 初始化，设置完数据源后调用*/
+/** 刷新某一个cell，用于修改标题/cell的数据源*/
 - (void)reloadCellWith:(NSInteger)index title:(NSString *)title data:(NSDictionary *)data;
 @end
 
