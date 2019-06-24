@@ -52,6 +52,11 @@
     }
     return nil;
 }
+/** 计算文字宽度 */
++ (CGFloat)widthWithString:(NSString *)string fs:(CGFloat)fs height:(CGFloat)height{
+    NSDictionary *attrs = @{NSFontAttributeName:[UIFont systemFontOfSize:fs]};
+    return  [string boundingRectWithSize:CGSizeMake(0, height) options:NSStringDrawingTruncatesLastVisibleLine | NSStringDrawingUsesLineFragmentOrigin | NSStringDrawingUsesFontLeading attributes:attrs context:nil].size.width;
+}
 @end
 UIColor *surgb(CGFloat red, CGFloat green, CGFloat blue)
 {

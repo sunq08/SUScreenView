@@ -13,6 +13,7 @@
 		FF10BDB422B2350D00454AD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF10BDB322B2350D00454AD6 /* Assets.xcassets */; };
 		FF10BDB722B2350D00454AD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF10BDB522B2350D00454AD6 /* LaunchScreen.storyboard */; };
 		FF10BDBA22B2350D00454AD6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10BDB922B2350D00454AD6 /* main.m */; };
+		FF751D4322C0770600DB5A9D /* SUCardLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF751D4222C0770600DB5A9D /* SUCardLabel.m */; };
 		FF77285022BCB1EB00CD53E5 /* IQTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF77282F22BCB1EB00CD53E5 /* IQTextView.m */; };
 		FF77285122BCB1EB00CD53E5 /* IQToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = FF77283322BCB1EB00CD53E5 /* IQToolbar.m */; };
 		FF77285222BCB1EB00CD53E5 /* IQTitleBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FF77283522BCB1EB00CD53E5 /* IQTitleBarButtonItem.m */; };
@@ -44,6 +45,8 @@
 		FF10BDB622B2350D00454AD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF10BDB822B2350D00454AD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF10BDB922B2350D00454AD6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FF751D4122C0770600DB5A9D /* SUCardLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUCardLabel.h; sourceTree = "<group>"; };
+		FF751D4222C0770600DB5A9D /* SUCardLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUCardLabel.m; sourceTree = "<group>"; };
 		FF77282F22BCB1EB00CD53E5 /* IQTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQTextView.m; sourceTree = "<group>"; };
 		FF77283022BCB1EB00CD53E5 /* IQTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQTextView.h; sourceTree = "<group>"; };
 		FF77283222BCB1EB00CD53E5 /* IQUIView+IQKeyboardToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+IQKeyboardToolbar.h"; sourceTree = "<group>"; };
@@ -152,6 +155,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FF751D4022C076D100DB5A9D /* SUCardLabel */ = {
+			isa = PBXGroup;
+			children = (
+				FF751D4122C0770600DB5A9D /* SUCardLabel.h */,
+				FF751D4222C0770600DB5A9D /* SUCardLabel.m */,
+			);
+			path = SUCardLabel;
+			sourceTree = "<group>";
+		};
 		FF77282D22BCB1EB00CD53E5 /* IQKeyboardManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -231,6 +243,7 @@
 		FFE9DE6122B2728400A0DF8D /* SUScreenView */ = {
 			isa = PBXGroup;
 			children = (
+				FF751D4022C076D100DB5A9D /* SUCardLabel */,
 				FFE9DE6222B2728400A0DF8D /* Config */,
 				FFE9DE6522B2728400A0DF8D /* DataPicker */,
 				FFE9DE6A22B2728400A0DF8D /* ScreenView */,
@@ -341,6 +354,7 @@
 				FFE9DE7322B2728400A0DF8D /* SUScreenOptionCell.m in Sources */,
 				FF77285022BCB1EB00CD53E5 /* IQTextView.m in Sources */,
 				FF77285322BCB1EB00CD53E5 /* IQBarButtonItem.m in Sources */,
+				FF751D4322C0770600DB5A9D /* SUCardLabel.m in Sources */,
 				FFA19AF322BA203B00832D2B /* SUTextFiledPicker.m in Sources */,
 				FF10BDAF22B2350100454AD6 /* ViewController.m in Sources */,
 				FF77285D22BCB1EB00CD53E5 /* IQKeyboardReturnKeyHandler.m in Sources */,

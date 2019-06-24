@@ -39,6 +39,8 @@ static const CGFloat SUCellDefaltHeight = 80.0; //cell默认高度
 + (UIImage *)imageWithColor:(UIColor *)color;
 /** 获取上级controller*/
 + (UIViewController *)getSuperViewController:(UIView *)view;
+/** 计算文字宽度 */
++ (CGFloat)widthWithString:(NSString *)string fs:(CGFloat)fs height:(CGFloat)height;
 @end
 /** 通过RGB创建颜色 rgb(173.0,23.0,11.0)*/
 UIColor *surgb(CGFloat red, CGFloat green, CGFloat blue);

@@ -82,11 +82,15 @@
     float width = (self.style == SUScreenViewStyleDrop)?SUScreenWidth:SUSideViewWidth;
     float viewH = 0;
     for (int index = 0; index < num; index ++) {
-        float height = SUCellDefaltHeight;
-        if([self.delegate respondsToSelector:@selector(suScreenViewCellHeightForIndex:)]){
-            height = [self.delegate suScreenViewCellHeightForIndex:index];
-        }
         SUScreenOptionCell *cell = [self.delegate suScreenViewCellForIndex:index];
+        float height = SUCellDefaltHeight;
+        if(cell.style == SUScreenCellStyleCardPicker || cell.style == SUScreenCellStyleCardMultiple){//卡片选择器
+            height = [cell getCardViewHeightWithSupW:width];
+        }else{
+            if([self.delegate respondsToSelector:@selector(suScreenViewCellHeightForIndex:)]){
+                height = [self.delegate suScreenViewCellHeightForIndex:index];
+            }
+        }
         cell.frame = CGRectMake(0, viewH, width, height);
         if(cell.style == SUScreenCellStyleOther && [self.delegate respondsToSelector:@selector(suCustomViewForCellIndex:)]){//自定义布局
             cell.customView = [self.delegate suCustomViewForCellIndex:index];

@@ -41,7 +41,7 @@
 
 #pragma mark - screen view
 - (NSInteger)suScreenViewOptionNumber{
-    return 5;
+    return 7;
 }
 
 - (SUScreenOptionCell *)suScreenViewCellForIndex:(NSInteger)index{
@@ -68,11 +68,27 @@
         };
         return cell;
     } else if(index == 3){
-        SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleOther identifier:@"type"];
+        SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleOther identifier:@"custom"];
         cell.title = @"自定义布局";
         return cell;
+    } else if(index == 4){
+        SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleCardPicker identifier:@"date"];
+        cell.title = @"卡片选择器";
+        cell.pickerData = @{@"-1":@"大前天",@"0":@"前天前天",@"1":@"昨天昨天昨天",@"2":@"今天天",@"3":@"明天明天",@"4":@"后天后天后天后天",@"5":@"大后天大后天大后天"};
+        cell.valueChanged = ^(NSString * _Nonnull value, NSString * _Nonnull identifier) {
+            NSLog(@"第%ld个cell内容改变了，改成了：%@，cell id为：%@",index,value,identifier);
+        };
+        return cell;
+    } else if(index == 5){
+        SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleCardMultiple identifier:@"status"];
+        cell.title = @"订单状态";
+        cell.pickerData = @{@"-1":@"全部",@"0":@"待付款",@"1":@"待发货",@"2":@"待收货",@"3":@"待评价",@"4":@"已完成",@"5":@"退款/售后"};
+        cell.valueChanged = ^(NSString * _Nonnull value, NSString * _Nonnull identifier) {
+            NSLog(@"第%ld个cell内容改变了，改成了：%@，cell id为：%@",index,value,identifier);
+        };
+        return cell;
     } else {
-        SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleRadio identifier:@"title"];
+        SUScreenOptionCell *cell = [[SUScreenOptionCell alloc]initWithFrame:CGRectZero style:SUScreenCellStyleRadio identifier:@"mySend"];
         cell.title = @"我发起的";
         cell.valueChanged = ^(NSString * _Nonnull value, NSString * _Nonnull identifier) {
             NSLog(@"第%ld个cell内容改变了，改成了：%@，cell id为：%@",index,value,identifier);
