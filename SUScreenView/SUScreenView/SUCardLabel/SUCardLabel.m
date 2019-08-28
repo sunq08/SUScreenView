@@ -20,6 +20,9 @@
     [label setTitleColor:[UIColor whiteColor] forState:UIControlStateSelected];
     [label setBackgroundImage:[SUScreenHelper imageWithColor:[UIColor whiteColor]] forState:UIControlStateNormal];
     [label setBackgroundImage:[SUScreenHelper imageWithColor:ResetBgColor] forState:UIControlStateSelected];
+    
+//    [label setBackgroundImage:[UIImage imageNamed:@"sucard_un"] forState:UIControlStateNormal];
+//    [label setBackgroundImage:[UIImage imageNamed:@"sucard_select"] forState:UIControlStateSelected];
     [SUScreenHelper layoutViewRadioWith:label radio:2];
     [label addTarget:label action:@selector(cardClick:) forControlEvents:UIControlEventTouchUpInside];
     

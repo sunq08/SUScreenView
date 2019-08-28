@@ -27,6 +27,7 @@
 static const CGFloat SUDropViewHeight   = 350.0;//顶部筛选框的高度
 static const CGFloat SUSideViewWidth    = 300.0;//侧边筛选框的宽度
 static const CGFloat SUCellDefaltHeight = 80.0; //cell默认高度
+static const CGFloat SULabelMinWidth    = 48.0; //label最小宽度
 
 @interface SUScreenHelper : NSObject
 /**设置圆角*/

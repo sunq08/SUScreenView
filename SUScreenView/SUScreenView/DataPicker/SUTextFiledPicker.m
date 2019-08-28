@@ -9,7 +9,7 @@
 #import "SUTextFiledPicker.h"
 #import "SUScreenConfig.h"
 
-static NSString  * const formatD = @"yyyy.MM.dd HH:mm:ss";
+static NSString  * const formatD = @"yyyy-MM-dd HH:mm:ss";
 
 @interface SUTextFiledPicker()<UIPickerViewDelegate, UIPickerViewDataSource>
 @property (nonatomic,strong) UIPickerView *pickerView;
@@ -38,20 +38,29 @@ static NSString  * const formatD = @"yyyy.MM.dd HH:mm:ss";
 
 - (void)initBase{
     self.tintColor =[UIColor clearColor];
-    
     if(self.style == SUTextFiledTimePicker){
         self.inputView = self.datePicker;
     }else{
         self.inputView = self.pickerView;
     }
-    
     UIToolbar *toolbar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([UIScreen mainScreen].bounds), 44)];
     toolbar.tintColor = [UIColor blueColor];
-    UIBarButtonItem *clear = [[UIBarButtonItem alloc] initWithTitle:@"清除" style:UIBarButtonItemStylePlain target:self action:@selector(clearDone)];
-    clear.tintColor = SUToolbarTintColor;
     UIBarButtonItem *space = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem *down = [[UIBarButtonItem alloc] initWithTitle:@"完成" style:UIBarButtonItemStylePlain target:self action:@selector(selectDone)];
-    down.tintColor = SUToolbarTintColor;
+    
+    UIButton    * customBtn1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 60, 60, 44)];
+    [customBtn1 setTitle:@"清除" forState:UIControlStateNormal];
+    [customBtn1 setTitleColor:SUToolbarTintColor forState:UIControlStateNormal];
+    customBtn1.enabled = NO;
+    [customBtn1 addTarget:self action:@selector(clearDone) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * clear = [[UIBarButtonItem alloc] initWithCustomView:customBtn1];
+    
+    UIButton    * customBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 60, 60, 44)];
+    [customBtn setTitle:@"完成" forState:UIControlStateNormal];
+    [customBtn setTitleColor:SUToolbarTintColor forState:UIControlStateNormal];
+    customBtn.enabled = NO;
+    [customBtn addTarget:self action:@selector(selectDone) forControlEvents:UIControlEventTouchUpInside];
+    UIBarButtonItem * down = [[UIBarButtonItem alloc] initWithCustomView:customBtn];
+
     toolbar.items = @[clear, space, down];
     self.inputAccessoryView = toolbar;
 }
@@ -91,7 +100,7 @@ static NSString  * const formatD = @"yyyy.MM.dd HH:mm:ss";
         self.text = val;
         if(![val isEqualToString:@""]){
             NSDateFormatter *format = [[NSDateFormatter alloc] init];
-            [format setDateFormat:formatD];
+            [format setDateFormat:_dateFormate?_dateFormate: formatD];
             _datePicker.date = [format dateFromString:val];
         }
     }
@@ -157,7 +166,7 @@ static NSString  * const formatD = @"yyyy.MM.dd HH:mm:ss";
 - (void)selectDone{
     if(self.style == SUTextFiledTimePicker){
         NSDateFormatter *format = [[NSDateFormatter alloc] init];
-        [format setDateFormat:formatD];
+        [format setDateFormat:_dateFormate?_dateFormate: formatD];
         self.val = [format stringFromDate:_datePicker.date];
     }else{
         NSArray *dataKey = [self.pickerData allKeys];

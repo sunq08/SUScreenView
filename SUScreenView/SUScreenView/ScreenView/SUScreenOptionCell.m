@@ -1,24 +1,28 @@
 //
 //  SUScreenOptionCell.m
-//  SUScreenView
+//  GHKC
 //
-//  Created by SunQ on 2019/6/13.
-//  Copyright © 2019年 sunq. All rights reserved.
+//  Created by SunQ on 2019/8/18.
+//  Copyright © 2019年 Tonghui Network Technology Co., Ltd. All rights reserved.
 //
 
 #import "SUScreenOptionCell.h"
+#import "SUScreenConfig.h"
 #import "SUTextFiledPicker.h"
 #import "SUCardLabel.h"
-#import "SUScreenConfig.h"
-@interface SUScreenOptionCell()<SUCardLabelDelegate>
+@interface SUScreenOptionCell()<SUCardLabelDelegate,UITextFieldDelegate>
 
-@property (nonatomic ,  copy) NSString              *identifier;//identifier
 @property (nonatomic ,strong) UILabel               *titleLab;//title
 @property (nonatomic ,strong) UITextField           *mainTF;//tf
 @property (nonatomic ,strong) SUTextFiledPicker     *mainPicker;//picker
 @property (nonatomic ,strong) SUTextFiledPicker     *mainDatePicker;//datepicker
 @property (nonatomic ,strong) UIButton              *mainRadio;//radio
 @property (nonatomic ,strong) UIView                *cardView;//cardView
+@property (nonatomic ,strong) SUTextFiledPicker     *startDatePicker;//startDatePicker
+@property (nonatomic ,strong) UILabel               *dateRangeLabel;//dateRangeLabel
+@property (nonatomic ,strong) SUTextFiledPicker     *endDatePicker;//endDatePicker
+
+
 @end
 
 @implementation SUScreenOptionCell
@@ -44,11 +48,15 @@
     } else if (self.style == SUScreenCellStyleDatePicker) {//时间
         [self addSubview:self.mainDatePicker];
     } else if (self.style == SUScreenCellStyleOther) {//自定义类型
-        
+        [self addSubview:self.customTF];
     } else if(self.style == SUScreenCellStyleCardPicker) {//card
         [self addSubview:self.cardView];
     } else if(self.style == SUScreenCellStyleCardMultiple) {//card
         [self addSubview:self.cardView];
+    } else if(self.style == SUScreenCellStyleDateRange) {//DateRange
+        [self addSubview:self.startDatePicker];
+        [self addSubview:self.endDatePicker];
+        [self addSubview:self.dateRangeLabel];
     } else {
         NSLog(@"错误的cell类型");
     }
@@ -58,7 +66,6 @@
     [super layoutSubviews];
     
     float width                     = self.frame.size.width;
-    float height                    = self.frame.size.height;
     self.titleLab.frame             = CGRectMake(15, 15, width - 30, 21);
     if(self.style == SUScreenCellStyleInput) {//输入框
         self.mainTF.frame           = CGRectMake(15, 44, width - 30, 30);
@@ -69,7 +76,7 @@
     } else if (self.style == SUScreenCellStyleDatePicker) {//时间
         self.mainDatePicker.frame   = CGRectMake(15, 44, width - 30, 30);
     } else if (self.style == SUScreenCellStyleOther) {//自定义布局
-        self.customView.frame       = CGRectMake(15, 44, width - 30, height-44-6);
+        self.customTF.frame         = CGRectMake(15, 44, width - 30, 30);
     } else if(self.style == SUScreenCellStyleCardPicker || self.style == SUScreenCellStyleCardMultiple){//card
         float labelH                = 30;//按钮高度
         float labelX                = 0;
@@ -77,6 +84,9 @@
         for (SUCardLabel *label in [self.cardView subviews]) {
             if([label isKindOfClass:[SUCardLabel class]]){
                 float labelW = [SUScreenHelper widthWithString:label.text fs:12 height:labelH] + 8;
+                if(labelW<SULabelMinWidth){
+                    labelW = SULabelMinWidth;
+                }
                 if((labelX + 4 + labelW) > (width - 30)){//超出一行，则换行
                     if((labelW + 4) >= (width - 30)){//看看是不是因为这个lab自己就超出了
                         labelW      = (width - 30);
@@ -93,7 +103,12 @@
         }
         float cardH                 = labelY + labelH;
         self.cardView.frame         = CGRectMake(15, 44, width - 30, cardH);
-    }  else {
+    } else if(self.style == SUScreenCellStyleDateRange) {//DateRange
+        float pickerW = (width - 30 - 30)/2;
+        self.startDatePicker.frame = CGRectMake(15, 44, pickerW, 30);
+        self.dateRangeLabel.frame = CGRectMake(15+pickerW, 44, 30, 30);
+        self.endDatePicker.frame = CGRectMake(15+pickerW+30, 44, pickerW, 30);
+    } else {
         NSLog(@"错误的cell类型");
     }
 }
@@ -130,6 +145,7 @@
         _mainPicker.backgroundColor     = [UIColor whiteColor];
         _mainPicker.leftView            = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
         _mainPicker.leftViewMode        = UITextFieldViewModeAlways;
+        _mainTF.inputView.hidden = YES;
         [_mainPicker addTarget:self action:@selector(pickerValueChanged:) forControlEvents:UIControlEventEditingDidEnd];
         [SUScreenHelper layoutViewRadioWith:_mainPicker radio:2];
     }
@@ -149,7 +165,15 @@
     }
     return _mainDatePicker;
 }
-
+-(void)setDateFormate:(NSString *)dateFormate{
+    _dateFormate = dateFormate;
+    if(self.style == SUScreenCellStyleDatePicker){
+        self.mainDatePicker.dateFormate = self.dateFormate;
+    }else if(self.style == SUScreenCellStyleDateRange){
+        self.startDatePicker.dateFormate = self.dateFormate;
+        self.endDatePicker.dateFormate = self.dateFormate;
+    }
+}
 - (UIButton *)mainRadio{
     if(!_mainRadio){
         _mainRadio = [UIButton buttonWithType:UIButtonTypeCustom];
@@ -171,12 +195,68 @@
     return _cardView;
 }
 
+- (SUTextFiledPicker *)startDatePicker{
+    if(!_startDatePicker){
+        _startDatePicker                 = [SUTextFiledPicker creatTextFiledWithStyle:SUTextFiledTimePicker];
+        _startDatePicker.placeholder     = @"请选择";
+        _startDatePicker.font            = [UIFont systemFontOfSize:13];
+        _startDatePicker.borderStyle     = UITextBorderStyleNone;
+        _startDatePicker.backgroundColor = [UIColor whiteColor];
+        _startDatePicker.leftView        = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
+        _startDatePicker.leftViewMode    = UITextFieldViewModeAlways;
+        [_startDatePicker addTarget:self action:@selector(pickerValueChanged:) forControlEvents:UIControlEventEditingDidEnd];
+        [SUScreenHelper layoutViewRadioWith:_startDatePicker radio:2];
+    }
+    return _startDatePicker;
+}
+
+- (SUTextFiledPicker *)endDatePicker{
+    if(!_endDatePicker){
+        _endDatePicker                 = [SUTextFiledPicker creatTextFiledWithStyle:SUTextFiledTimePicker];
+        _endDatePicker.font            = [UIFont systemFontOfSize:13];
+        _endDatePicker.placeholder     = @"请选择";
+        _endDatePicker.borderStyle     = UITextBorderStyleNone;
+        _endDatePicker.backgroundColor = [UIColor whiteColor];
+        _endDatePicker.leftView        = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
+        _endDatePicker.leftViewMode    = UITextFieldViewModeAlways;
+        [_endDatePicker addTarget:self action:@selector(pickerValueChanged:) forControlEvents:UIControlEventEditingDidEnd];
+        [SUScreenHelper layoutViewRadioWith:_endDatePicker radio:2];
+    }
+    return _endDatePicker;
+}
+
+- (UILabel *)dateRangeLabel{
+    if(!_dateRangeLabel){
+        _dateRangeLabel                 = [[UILabel alloc]init];
+        _dateRangeLabel.font            = [UIFont systemFontOfSize:13];
+        _dateRangeLabel.textAlignment   = NSTextAlignmentCenter;
+        _dateRangeLabel.text            = @"到";
+        _dateRangeLabel.textColor       = [UIColor darkGrayColor];
+    }
+    return _dateRangeLabel;
+}
+
+- (UITextField *)customTF{
+    if(!_customTF){
+        _customTF                     = [[UITextField alloc]init];
+        _customTF.font                = [UIFont systemFontOfSize:13];
+        _customTF.borderStyle         = UITextBorderStyleNone;
+        _customTF.backgroundColor     = [UIColor whiteColor];
+        _customTF.leftView            = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 8, 0)];
+        _customTF.leftViewMode        = UITextFieldViewModeAlways;
+        _customTF.delegate            = self;
+        [_customTF addTarget:self action:@selector(textFieldValueChanged:) forControlEvents:UIControlEventEditingDidEnd];
+        [SUScreenHelper layoutViewRadioWith:_mainTF radio:2];
+    }
+    return _customTF;
+}
+
 - (NSDictionary *)data{
     if(self.style == SUScreenCellStyleInput){
         return @{self.identifier:self.mainTF.text};
     }
     if(self.style == SUScreenCellStyleSelect){
-        return @{self.identifier:self.mainPicker.text};
+        return @{self.identifier:self.mainPicker.val?self.mainPicker.val:@""};
     }
     if(self.style == SUScreenCellStyleRadio){
         return @{self.identifier:self.mainRadio.selected?@"1":@"0"};
@@ -192,24 +272,27 @@
         }
     }
     if(self.style == SUScreenCellStyleCardMultiple){
-        NSMutableArray *value = [NSMutableArray new];
+        NSMutableString *value = [NSMutableString stringWithString:@""];
         for (SUCardLabel *label in [self.cardView subviews]) {
             if([label isKindOfClass:[SUCardLabel class]] && label.selected){
-                [value addObject:label.val];
+                if([value isEqualToString:@""]){
+                    [value appendString:label.val];
+                }else [value appendFormat:@",%@",label.val];
             }
         }
         return @{self.identifier:value};
+    }
+    if(self.style == SUScreenCellStyleDateRange){
+        NSArray *identifiers = [self.identifier componentsSeparatedByString:@","];
+        return @{identifiers[0]:self.startDatePicker.text,identifiers[1]:self.endDatePicker.text};
+    }
+    if(self.style == SUScreenCellStyleOther){
+        return @{self.identifier:self.customValue?self.customValue:self.customTF.text};
     }
     return @{};
 }
 
 #pragma mark - supper set
-- (void)setCustomView:(UIView *)customView{
-    _customView = customView;
-    
-    [self addSubview:customView];
-}
-
 - (void)setTitle:(NSString *)title{
     _title = title;
     
@@ -220,6 +303,8 @@
         self.mainPicker.placeholder = [NSString stringWithFormat:@"请选择%@",title];
     } else if (self.style == SUScreenCellStyleDatePicker){
         self.mainDatePicker.placeholder = [NSString stringWithFormat:@"请选择%@",title];
+    } else if (self.style == SUScreenCellStyleOther){
+        self.customTF.placeholder = [NSString stringWithFormat:@"请选择%@",title];
     }
 }
 
@@ -241,6 +326,38 @@
     }
 }
 
+- (void)setDynamicValue:(NSString *)dynamicValue{
+    if(self.style == SUScreenCellStyleInput){
+        self.mainTF.text = dynamicValue;
+    }
+    if(self.style == SUScreenCellStyleSelect){
+        self.mainPicker.val = dynamicValue;
+    }
+    if(self.style == SUScreenCellStyleRadio){
+        self.mainRadio.selected = ([dynamicValue isEqualToString:@"1"]);
+    }
+    if(self.style == SUScreenCellStyleDatePicker){
+        self.mainDatePicker.text = dynamicValue;
+    }
+    if(self.style == SUScreenCellStyleCardPicker){
+        for (SUCardLabel *label in [self.cardView subviews]) {
+            if([label isKindOfClass:[SUCardLabel class]]){
+                label.selected = ([label.val isEqualToString:dynamicValue]);
+            }
+        }
+    }
+    if(self.style == SUScreenCellStyleCardMultiple){
+        
+    }
+    if(self.style == SUScreenCellStyleDateRange){//
+        
+    }
+    if(self.style == SUScreenCellStyleOther){
+        self.customTF.text = dynamicValue;
+        self.customValue = dynamicValue;
+    }
+}
+
 #pragma mark - privately
 - (void)radioClick:(UIButton *)sender{
     sender.selected = !sender.selected;
@@ -258,6 +375,18 @@
         self.mainRadio.selected = NO;
     } else if (self.style == SUScreenCellStyleDatePicker){
         self.mainDatePicker.val = @"";
+    } else if (self.style == SUScreenCellStyleDateRange){
+        self.startDatePicker.val = @"";
+        self.endDatePicker.val   = @"";
+    } else if (self.style == SUScreenCellStyleCardPicker || self.style == SUScreenCellStyleCardMultiple){
+        for (SUCardLabel *label in [self.cardView subviews]) {
+            if([label isKindOfClass:[SUCardLabel class]]){
+                label.selected = NO;
+            }
+        }
+    } else if (self.style == SUScreenCellStyleOther) {//自定义类型
+        self.customTF.text = @"";
+        self.customValue = @"";
     }
 }
 
@@ -286,8 +415,11 @@
         for (SUCardLabel *label in [self.cardView subviews]) {
             if([label isKindOfClass:[SUCardLabel class]]){
                 float labelW = [SUScreenHelper widthWithString:label.text fs:12 height:labelH] + 8;
-                if((labelX + 4 + labelW)>width){//超出一行，则换行
-                    if((labelW + 4)>=width) labelW      = width;
+                if(labelW<SULabelMinWidth){
+                    labelW = SULabelMinWidth;
+                }
+                if((labelX + 4 + labelW)>(width-30)){//超出一行，则换行
+                    if((labelW + 4)>=(width-30)) labelW      = (width-30);
                     labelX          = 0 + labelW + 4;
                     labelY          += (labelH + 4);
                 }else labelX        += labelW + 4; //水平间隙
@@ -295,7 +427,13 @@
         }
         return labelY + labelH + 44.0;
     }
-    return 0.0;
+    return 44.0;
+}
+
+#pragma mark - text filed delegate
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField{
+    self.suScreenCellClick(self.identifier);
+    return NO;
 }
 
 @end

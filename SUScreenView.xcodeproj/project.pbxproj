@@ -13,7 +13,6 @@
 		FF10BDB422B2350D00454AD6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF10BDB322B2350D00454AD6 /* Assets.xcassets */; };
 		FF10BDB722B2350D00454AD6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF10BDB522B2350D00454AD6 /* LaunchScreen.storyboard */; };
 		FF10BDBA22B2350D00454AD6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF10BDB922B2350D00454AD6 /* main.m */; };
-		FF751D4322C0770600DB5A9D /* SUCardLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF751D4222C0770600DB5A9D /* SUCardLabel.m */; };
 		FF77285022BCB1EB00CD53E5 /* IQTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF77282F22BCB1EB00CD53E5 /* IQTextView.m */; };
 		FF77285122BCB1EB00CD53E5 /* IQToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = FF77283322BCB1EB00CD53E5 /* IQToolbar.m */; };
 		FF77285222BCB1EB00CD53E5 /* IQTitleBarButtonItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FF77283522BCB1EB00CD53E5 /* IQTitleBarButtonItem.m */; };
@@ -28,10 +27,12 @@
 		FF77285B22BCB1EB00CD53E5 /* IQUIView+Hierarchy.m in Sources */ = {isa = PBXBuildFile; fileRef = FF77284922BCB1EB00CD53E5 /* IQUIView+Hierarchy.m */; };
 		FF77285C22BCB1EB00CD53E5 /* IQUIViewController+Additions.m in Sources */ = {isa = PBXBuildFile; fileRef = FF77284D22BCB1EB00CD53E5 /* IQUIViewController+Additions.m */; };
 		FF77285D22BCB1EB00CD53E5 /* IQKeyboardReturnKeyHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FF77284F22BCB1EB00CD53E5 /* IQKeyboardReturnKeyHandler.m */; };
-		FFA19AF322BA203B00832D2B /* SUTextFiledPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FFA19AF222BA203B00832D2B /* SUTextFiledPicker.m */; };
-		FFE9DE6F22B2728400A0DF8D /* SUScreenConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE9DE6422B2728400A0DF8D /* SUScreenConfig.m */; };
-		FFE9DE7222B2728400A0DF8D /* SUScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE9DE6B22B2728400A0DF8D /* SUScreenView.m */; };
-		FFE9DE7322B2728400A0DF8D /* SUScreenOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FFE9DE6E22B2728400A0DF8D /* SUScreenOptionCell.m */; };
+		FF7B578B2316191000ED3A15 /* SUCardView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B577B2316191000ED3A15 /* SUCardView.m */; };
+		FF7B578C2316191000ED3A15 /* SUCardLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B577C2316191000ED3A15 /* SUCardLabel.m */; };
+		FF7B578D2316191000ED3A15 /* SUScreenConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B577F2316191000ED3A15 /* SUScreenConfig.m */; };
+		FF7B57902316191000ED3A15 /* SUTextFiledPicker.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B57852316191000ED3A15 /* SUTextFiledPicker.m */; };
+		FF7B57912316191000ED3A15 /* SUScreenView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B57872316191000ED3A15 /* SUScreenView.m */; };
+		FF7B57922316191000ED3A15 /* SUScreenOptionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FF7B578A2316191000ED3A15 /* SUScreenOptionCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,8 +46,6 @@
 		FF10BDB622B2350D00454AD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF10BDB822B2350D00454AD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF10BDB922B2350D00454AD6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		FF751D4122C0770600DB5A9D /* SUCardLabel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUCardLabel.h; sourceTree = "<group>"; };
-		FF751D4222C0770600DB5A9D /* SUCardLabel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUCardLabel.m; sourceTree = "<group>"; };
 		FF77282F22BCB1EB00CD53E5 /* IQTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQTextView.m; sourceTree = "<group>"; };
 		FF77283022BCB1EB00CD53E5 /* IQTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IQTextView.h; sourceTree = "<group>"; };
 		FF77283222BCB1EB00CD53E5 /* IQUIView+IQKeyboardToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+IQKeyboardToolbar.h"; sourceTree = "<group>"; };
@@ -76,14 +75,18 @@
 		FF77284D22BCB1EB00CD53E5 /* IQUIViewController+Additions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "IQUIViewController+Additions.m"; sourceTree = "<group>"; };
 		FF77284E22BCB1EB00CD53E5 /* IQUIView+Hierarchy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "IQUIView+Hierarchy.h"; sourceTree = "<group>"; };
 		FF77284F22BCB1EB00CD53E5 /* IQKeyboardReturnKeyHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IQKeyboardReturnKeyHandler.m; sourceTree = "<group>"; };
-		FFA19AF122BA203B00832D2B /* SUTextFiledPicker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SUTextFiledPicker.h; sourceTree = "<group>"; };
-		FFA19AF222BA203B00832D2B /* SUTextFiledPicker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SUTextFiledPicker.m; sourceTree = "<group>"; };
-		FFE9DE6322B2728400A0DF8D /* SUScreenConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUScreenConfig.h; sourceTree = "<group>"; };
-		FFE9DE6422B2728400A0DF8D /* SUScreenConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUScreenConfig.m; sourceTree = "<group>"; };
-		FFE9DE6B22B2728400A0DF8D /* SUScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUScreenView.m; sourceTree = "<group>"; };
-		FFE9DE6C22B2728400A0DF8D /* SUScreenOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUScreenOptionCell.h; sourceTree = "<group>"; };
-		FFE9DE6D22B2728400A0DF8D /* SUScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUScreenView.h; sourceTree = "<group>"; };
-		FFE9DE6E22B2728400A0DF8D /* SUScreenOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUScreenOptionCell.m; sourceTree = "<group>"; };
+		FF7B57792316191000ED3A15 /* SUCardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUCardView.h; sourceTree = "<group>"; };
+		FF7B577A2316191000ED3A15 /* SUCardLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUCardLabel.h; sourceTree = "<group>"; };
+		FF7B577B2316191000ED3A15 /* SUCardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUCardView.m; sourceTree = "<group>"; };
+		FF7B577C2316191000ED3A15 /* SUCardLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUCardLabel.m; sourceTree = "<group>"; };
+		FF7B577E2316191000ED3A15 /* SUScreenConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUScreenConfig.h; sourceTree = "<group>"; };
+		FF7B577F2316191000ED3A15 /* SUScreenConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUScreenConfig.m; sourceTree = "<group>"; };
+		FF7B57842316191000ED3A15 /* SUTextFiledPicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUTextFiledPicker.h; sourceTree = "<group>"; };
+		FF7B57852316191000ED3A15 /* SUTextFiledPicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUTextFiledPicker.m; sourceTree = "<group>"; };
+		FF7B57872316191000ED3A15 /* SUScreenView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUScreenView.m; sourceTree = "<group>"; };
+		FF7B57882316191000ED3A15 /* SUScreenOptionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUScreenOptionCell.h; sourceTree = "<group>"; };
+		FF7B57892316191000ED3A15 /* SUScreenView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUScreenView.h; sourceTree = "<group>"; };
+		FF7B578A2316191000ED3A15 /* SUScreenOptionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUScreenOptionCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,8 +119,8 @@
 		FF10BDA922B2350100454AD6 /* SUScreenView */ = {
 			isa = PBXGroup;
 			children = (
+				FF7B57772316191000ED3A15 /* SUScreenView */,
 				FF77282D22BCB1EB00CD53E5 /* IQKeyboardManager */,
-				FFE9DE6122B2728400A0DF8D /* SUScreenView */,
 				FF10BDC022B2352D00454AD6 /* AppDelegate */,
 				FF10BDC122B2353800454AD6 /* Controller */,
 				FF10BDC222B2355700454AD6 /* Supporting Files */,
@@ -153,15 +156,6 @@
 				FF10BDB922B2350D00454AD6 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		FF751D4022C076D100DB5A9D /* SUCardLabel */ = {
-			isa = PBXGroup;
-			children = (
-				FF751D4122C0770600DB5A9D /* SUCardLabel.h */,
-				FF751D4222C0770600DB5A9D /* SUCardLabel.m */,
-			);
-			path = SUCardLabel;
 			sourceTree = "<group>";
 		};
 		FF77282D22BCB1EB00CD53E5 /* IQKeyboardManager */ = {
@@ -240,42 +234,53 @@
 			path = Categories;
 			sourceTree = "<group>";
 		};
-		FFE9DE6122B2728400A0DF8D /* SUScreenView */ = {
+		FF7B57772316191000ED3A15 /* SUScreenView */ = {
 			isa = PBXGroup;
 			children = (
-				FF751D4022C076D100DB5A9D /* SUCardLabel */,
-				FFE9DE6222B2728400A0DF8D /* Config */,
-				FFE9DE6522B2728400A0DF8D /* DataPicker */,
-				FFE9DE6A22B2728400A0DF8D /* ScreenView */,
+				FF7B57782316191000ED3A15 /* SUCardLabel */,
+				FF7B577D2316191000ED3A15 /* Config */,
+				FF7B57832316191000ED3A15 /* DataPicker */,
+				FF7B57862316191000ED3A15 /* ScreenView */,
 			);
 			path = SUScreenView;
 			sourceTree = "<group>";
 		};
-		FFE9DE6222B2728400A0DF8D /* Config */ = {
+		FF7B57782316191000ED3A15 /* SUCardLabel */ = {
 			isa = PBXGroup;
 			children = (
-				FFE9DE6322B2728400A0DF8D /* SUScreenConfig.h */,
-				FFE9DE6422B2728400A0DF8D /* SUScreenConfig.m */,
+				FF7B57792316191000ED3A15 /* SUCardView.h */,
+				FF7B577B2316191000ED3A15 /* SUCardView.m */,
+				FF7B577A2316191000ED3A15 /* SUCardLabel.h */,
+				FF7B577C2316191000ED3A15 /* SUCardLabel.m */,
+			);
+			path = SUCardLabel;
+			sourceTree = "<group>";
+		};
+		FF7B577D2316191000ED3A15 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				FF7B577E2316191000ED3A15 /* SUScreenConfig.h */,
+				FF7B577F2316191000ED3A15 /* SUScreenConfig.m */,
 			);
 			path = Config;
 			sourceTree = "<group>";
 		};
-		FFE9DE6522B2728400A0DF8D /* DataPicker */ = {
+		FF7B57832316191000ED3A15 /* DataPicker */ = {
 			isa = PBXGroup;
 			children = (
-				FFA19AF122BA203B00832D2B /* SUTextFiledPicker.h */,
-				FFA19AF222BA203B00832D2B /* SUTextFiledPicker.m */,
+				FF7B57842316191000ED3A15 /* SUTextFiledPicker.h */,
+				FF7B57852316191000ED3A15 /* SUTextFiledPicker.m */,
 			);
 			path = DataPicker;
 			sourceTree = "<group>";
 		};
-		FFE9DE6A22B2728400A0DF8D /* ScreenView */ = {
+		FF7B57862316191000ED3A15 /* ScreenView */ = {
 			isa = PBXGroup;
 			children = (
-				FFE9DE6D22B2728400A0DF8D /* SUScreenView.h */,
-				FFE9DE6B22B2728400A0DF8D /* SUScreenView.m */,
-				FFE9DE6C22B2728400A0DF8D /* SUScreenOptionCell.h */,
-				FFE9DE6E22B2728400A0DF8D /* SUScreenOptionCell.m */,
+				FF7B57892316191000ED3A15 /* SUScreenView.h */,
+				FF7B57872316191000ED3A15 /* SUScreenView.m */,
+				FF7B57882316191000ED3A15 /* SUScreenOptionCell.h */,
+				FF7B578A2316191000ED3A15 /* SUScreenOptionCell.m */,
 			);
 			path = ScreenView;
 			sourceTree = "<group>";
@@ -351,22 +356,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FFE9DE7322B2728400A0DF8D /* SUScreenOptionCell.m in Sources */,
+				FF7B578C2316191000ED3A15 /* SUCardLabel.m in Sources */,
 				FF77285022BCB1EB00CD53E5 /* IQTextView.m in Sources */,
+				FF7B57912316191000ED3A15 /* SUScreenView.m in Sources */,
 				FF77285322BCB1EB00CD53E5 /* IQBarButtonItem.m in Sources */,
-				FF751D4322C0770600DB5A9D /* SUCardLabel.m in Sources */,
-				FFA19AF322BA203B00832D2B /* SUTextFiledPicker.m in Sources */,
+				FF7B57922316191000ED3A15 /* SUScreenOptionCell.m in Sources */,
 				FF10BDAF22B2350100454AD6 /* ViewController.m in Sources */,
+				FF7B578D2316191000ED3A15 /* SUScreenConfig.m in Sources */,
 				FF77285D22BCB1EB00CD53E5 /* IQKeyboardReturnKeyHandler.m in Sources */,
-				FFE9DE7222B2728400A0DF8D /* SUScreenView.m in Sources */,
 				FF77285222BCB1EB00CD53E5 /* IQTitleBarButtonItem.m in Sources */,
 				FF77285422BCB1EB00CD53E5 /* IQUIView+IQKeyboardToolbar.m in Sources */,
 				FF77285722BCB1EB00CD53E5 /* IQKeyboardManager.m in Sources */,
+				FF7B57902316191000ED3A15 /* SUTextFiledPicker.m in Sources */,
 				FF77285822BCB1EB00CD53E5 /* IQNSArray+Sort.m in Sources */,
 				FF77285C22BCB1EB00CD53E5 /* IQUIViewController+Additions.m in Sources */,
 				FF77285522BCB1EB00CD53E5 /* IQPreviousNextView.m in Sources */,
 				FF77285122BCB1EB00CD53E5 /* IQToolbar.m in Sources */,
-				FFE9DE6F22B2728400A0DF8D /* SUScreenConfig.m in Sources */,
+				FF7B578B2316191000ED3A15 /* SUCardView.m in Sources */,
 				FF10BDBA22B2350D00454AD6 /* main.m in Sources */,
 				FF77285A22BCB1EB00CD53E5 /* IQUIScrollView+Additions.m in Sources */,
 				FF77285922BCB1EB00CD53E5 /* IQUITextFieldView+Additions.m in Sources */,

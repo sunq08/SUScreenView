@@ -22,7 +22,8 @@ typedef enum SUTextFiledPickerStyle {
 @property (nonatomic, strong) NSDictionary  *pickerData;
 /** 取值*/
 @property (nonatomic, strong) NSString      *val;
-
+/** 日期格式*/
+@property (nonatomic, strong) NSString      *dateFormate;
 @end
 
 NS_ASSUME_NONNULL_END
